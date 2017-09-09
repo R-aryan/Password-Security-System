@@ -1,2 +1,2 @@
 # Password-Security-System
-This repository is created to implement a password security system in C as our minor project using various encryption and hashing techniques.
+This repository is created to implement a password security system in C using various encryption and hashing techniques.
