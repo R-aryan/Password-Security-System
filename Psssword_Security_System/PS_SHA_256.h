@@ -1,5 +1,5 @@
-#ifndef SHA256_H_INCLUDED
-#define SHA256_H_INCLUDED
+#ifndef PS_SHA_256_H_INCLUDED
+#define PS_SHA_256_H_INCLUDED
 
 
 /*************************** HEADER FILES ***************************/
@@ -20,9 +20,10 @@ typedef struct {
 } SHA2;
 
 /*********************** FUNCTION DECLARATIONS **********************/
-void sha256_init(SHA2 *ptr);
-void sha256_update(SHA2 *ptr, const uc data[], size_t len);
-void sha256_final(SHA2 *ptr, uc hash[]);
+void initilize(SHA2 *ptr);
+void update(SHA2 *ptr, const uc data[], size_t len);
+void data_final(SHA2 *ptr, uc hash[]);
+void print_hash(uc hash[]);
 
 
-#endif // SHA256_H_INCLUDED
+#endif // PS_SHA_256_H_INCLUDED

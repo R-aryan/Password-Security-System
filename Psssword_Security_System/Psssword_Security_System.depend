@@ -1,0 +1,19 @@
+# depslib dependency file v1.0
+1505133158 source:g:\code_chef\minor\psssword_security_system\main.c
+	<stdio.h>
+	<memory.h>
+	<string.h>
+	"sha256.h"
+
+1505025200 g:\code_chef\minor\psssword_security_system\sha256.h
+	<stddef.h>
+
+1505135557 source:g:\code_chef\minor\psssword_security_system\ps_sha_256.c
+	<stdio.h>
+	<memory.h>
+	<string.h>
+	"PS_SHA_256.h"
+
+1505135495 g:\code_chef\minor\psssword_security_system\ps_sha_256.h
+	<stddef.h>
+
