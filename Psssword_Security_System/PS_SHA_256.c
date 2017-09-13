@@ -5,8 +5,10 @@
               SHA-256 is one of the three algorithms in the SHA2
               specification. The others, SHA-384 and SHA-512, are not
               offered in this implementation.
-              Algorithm specification can be found here:
+              Algorithm Description and  specification can be found here:
                *http://csrc.nist.gov/publications/fips/fips180-4/fips-180-4.pdf
+	      Algorithm implementation Example can be found here
+	       *http://csrc.nist.gov/groups/ST/toolkit/documents/Examples/SHA256.pdf
               This implementation uses little endian uc order.
 
 *********************************************************************/
