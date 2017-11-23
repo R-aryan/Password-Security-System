@@ -1,14 +1,13 @@
 /*********************************************************************
-* Filename:   PS_SHA_256.c
+* Filename:   sha256.c
 * Author:     Ritesh Aryan
+* Disclaimer: This code is presented "as is" without any guarantees.
 * Details:    Implementation of the SHA-256 hashing algorithm.
               SHA-256 is one of the three algorithms in the SHA2
               specification. The others, SHA-384 and SHA-512, are not
               offered in this implementation.
-              Algorithm Description and  specification can be found here:
-               *http://csrc.nist.gov/publications/fips/fips180-4/fips-180-4.pdf
-	      Algorithm implementation Example can be found here
-	       *http://csrc.nist.gov/groups/ST/toolkit/documents/Examples/SHA256.pdf
+              Algorithm specification can be found here:
+               * http://csrc.nist.gov/publications/fips/fips180-2/fips180-2withchangenotice.pdf
               This implementation uses little endian uc order.
 
 *********************************************************************/
@@ -179,13 +178,15 @@ void data_final(SHA2 *ptr, uc hash[])
 
 }
 
-void print_hash(uc hash[])
+uc* print_hash(uc hash[])
 {
     printf("The hash value of your entered string is \n");
    int idx;
    for (idx=0; idx < 32; idx++)
       printf("%02x",hash[idx]);
    printf("\n");
+
+  return  hash;
 }
 
 /*int sha256_test()
