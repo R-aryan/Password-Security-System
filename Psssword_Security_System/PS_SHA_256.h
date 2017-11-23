@@ -28,7 +28,6 @@ For variable b all 8 bits are available and the range is 0 to 255 (2^8 -1).
 If you use char as character, "unsigned" is completely ignored by the compiler just as comments are removed from your program.
 
 */
-
 typedef struct {
 	uc data[64];
 	ui datalen;
@@ -40,7 +39,7 @@ typedef struct {
 void initilize(SHA2 *ptr);
 void update(SHA2 *ptr, const uc data[], size_t len);
 void data_final(SHA2 *ptr, uc hash[]);
-void print_hash(uc hash[]);
+uc* print_hash(uc hash[]);
 
 
 #endif // PS_SHA_256_H_INCLUDED
