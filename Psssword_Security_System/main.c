@@ -10,6 +10,7 @@
 #define MAX_LIMIT 1000
 
 
+
 void signup(char *username, char *password);
 int verifyPassword(int ,char *);
 int verifyUsername(char *);
@@ -28,52 +29,70 @@ int main()
     int choice;
     char username[50],password[50];
 
-    printf("1. Signin \n");
-    printf("2. Signup (New User) \n");
+
+    printf("\n**************Password Security System******************************\n");
+    printf("\n**************1. Signin(Existing User)****************************** \n");
+    printf("\n**************2. Signup(New User)*********************************** \n");
+    printf("\n******************************************************************** \n");
+
+
     scanf("%d",&choice);
 
     if(choice==1)
     {
         int sNo;
-        printf("Username:\n");
+        printf("\n Enter your Username:\n");
+        printf("\n**********************\n");
         scanf("%s",username);
         sNo=verifyUsername(username);
         if(sNo)
         {
-            printf("Username verified.\n");
-            printf("Password:\n");
+            printf("\n Username verified.\n");
+            printf(" \n******************** \n");
+            printf("\n Enter Your Password:\n");
+            printf("\n************************ \n");
             scanf("%s",password);
 
            if(verifyPassword(sNo,password))
             {
-                printf("Login Successful\n");
+                printf("\n Login Successful\n");
+                printf("\n******************\n");
+
             }
             else
             {
-                printf("Wrong Password\n");
+                printf("\n Wrong Password\n");
+                printf("\n******************\n");
+
             }
         }
         else
         {
             printf("No such user exists.\n");
+            printf("\n******************\n");
         }
 
     }
 
     else if(choice==2)
     {
-        printf("Username:\n");
+        printf("\n Enter your Username:\n");
+        printf("\n**********************\n");
         scanf("%s",username);
 
-        printf("Password:\n");
+        printf("\n Enter Your Password:\n");
+        printf("\n************************ \n");
         scanf("%s",password);
 
         signup(username,password);
+        printf("\n Signed up Successfully:\n");
+        printf("\n************************ \n");
     }
 
     else
     {
         printf("Invalid choice! Try again.");
+        printf("\n************************ \n");
     }
     return 0;
 }
@@ -148,7 +167,7 @@ void signup(char *username,char *password)
     SHA2 ptr;
     memset(hash,0,sizeof(hash));
 
-    FILE *fp_user_directory,*fp_pwd_directory1;
+    FILE *fp_user_directory,*fp_pwd_directory1,*fp_backup;
     FILE *fp_pwd_directory;
     fp_user_directory=fopen("user_directory.txt","a");
     fputs(username,fp_user_directory);
@@ -163,18 +182,23 @@ void signup(char *username,char *password)
       fp_pwd_directory1=fopen("PWD.txt","a");
       fputs(password,fp_pwd_directory1);
       fputs("\n",fp_pwd_directory1);
+      fp_backup=fopen("User_Backup.txt","a");
+      fputs(username,fp_backup);
+      fputs("\n",fp_backup);
+      fclose(fp_backup);
+
 
     // Hash one
       initilize(&ptr);
       update(&ptr,password,strlen(password));
       data_final(&ptr,hash);
-      printf("Printng the contents using standard hash function for storing purpose \n\n");
-      h1=print_hash(hash);
+      //printf("Printng the contents using standard hash function for storing purpose \n\n");
+     //h1=print_hash(hash);
       //h1= struprr(h1);
 
 
     fp_pwd_directory=fopen("pwd_directory.txt","a");
-    fputs(h1,fp_pwd_directory);
+    fputs(hash,fp_pwd_directory);
     fputs("\n",fp_pwd_directory);
     //fprintf(fp_pwd_directory,"%02x",h1);
     fclose(fp_pwd_directory);
@@ -256,7 +280,7 @@ int verifyPassword(int sNo,char *pwd_query)
       update(&ptr,pwd_query,strlen(pwd_query));
       data_final(&ptr,hash);
 
-      h1= print_hash(hash);
+      //h1= print_hash(hash);
      // printf(" \n\n Printng the contents using standard hash function matching purpose in verification function \n\n");
 
 
