@@ -6,8 +6,11 @@
 #include<time.h>//time(0)
 #include<ctype.h>
 #include "PS_SHA_256.h"
+//#include "aes.c"
 
 #define MAX_LIMIT 1000
+
+
 
 
 
@@ -17,16 +20,15 @@ int verifyUsername(char *);
 char* generateSalt();
 char salt[5];
 char* getSalt(int sNo);
+//void file_encrypt();
 //uc* struprr(uc *);
-int hex_to_ascii(char c, char d);
-int hex_to_int(char c);
 
 
 
 
 int main()
 {
-    int choice;
+    int choice,check;
     char username[50],password[50];
 
 
@@ -76,13 +78,24 @@ int main()
 
     else if(choice==2)
     {
-        printf("\n Enter your Username:\n");
+       reu: printf("\n Enter your Username:\n");
         printf("\n**********************\n");
         scanf("%s",username);
+        check= (int)(username[0]);
+        if(strlen(username)<3 || (check>=48 &&check <=57) )
+           {
+               printf("username should be of at least 3 characters or should not start with a number re-enter \n");
+               goto reu;
+           }
 
-        printf("\n Enter Your Password:\n");
+        rep:printf("\n Enter Your Password:\n");
         printf("\n************************ \n");
         scanf("%s",password);
+        if(strlen(password)<8)
+        {
+            printf("Your password is too weak..!!Enter password of atleast 8 characters..\n ");
+            goto rep;
+        }
 
         signup(username,password);
         printf("\n Signed up Successfully:\n");
@@ -94,6 +107,8 @@ int main()
         printf("Invalid choice! Try again.");
         printf("\n************************ \n");
     }
+
+    //file_encrypt();
     return 0;
 }
 
@@ -118,23 +133,6 @@ int main()
 
     return h1;
 } */
-
-int hex_to_int(char c)
-{
-if (c >= 97)
-        c = c - 32;
-    int first = c / 16 - 3;
-    int second = c % 16;
-    int result = first * 10 + second;
-    if (result > 9) result--;
-    return result;
-}
-
-int hex_to_ascii(char c, char d){
-        int high = hex_to_int(c) * 16;
-        int low = hex_to_int(d);
-        return high+low;
-}
 
 char* generateSalt()
 {
@@ -346,3 +344,99 @@ int verifyPassword(int sNo,char *pwd_query)
    return 0;
 }
 */
+
+/*void file_encrypt()
+{
+    int i,len;
+
+	 // Key size
+
+	// Calculate Nk and Nr from the given Nr value.
+	Nk = Nr / 32;
+	Nr = Nk + 6;
+    fflush(NULL);
+    char *buf = malloc(chunk);
+    char buff=0;
+    FILE *file;
+    size_t nread;
+    char outword[100000];
+    file = fopen("User_Backup.txt", "r");
+    if (buf == NULL) {
+
+    }
+   if(file)
+{
+    while ((nread = fread(buf, 1, chunk, file)) > 0) {
+    strip(buf);
+    fwrite(buf, 1, nread, stdout);
+
+
+    if (ferror(file)) {
+
+    }
+    fclose(file);
+}
+     len=strlen(buf);
+      if(buf[len-1]=='\n')
+          buf[--len] = '\0';
+          for(i = 0; i<len; i++)
+          {
+              sprintf(outword+i*2, "%02X", buf[i]);
+          }
+          printf("\nArray elements are : \n");
+
+          memcpy(temp2,buf,len);
+          /*for(i=0;i<len;i++)
+          {
+              printf("Hex: %#04X\n",temp2[i]);
+          }
+          printf("\n");
+}
+
+	// Copy the Key and PlainText
+	for(i=0;i<Nk*4;i++)
+	{
+		Key[i]=temp[i];
+		in[i]=temp2[i];
+	}
+
+// The KeyExpansion routine must be called before encryption.
+	KeyExpansion();
+    /*printf("\n Plaintext:\n");
+    for(i=0;i<Nk*4;i++)
+	{
+
+		printf("%02x ",in[i]);
+	} */
+	// The next function call encrypts the PlainText with the Key using AES algorithm.
+	//Cipher();
+
+
+	// Output the encrypted text.
+	/*printf("\nHexadecimal after encryption:\n");
+
+	for(i=0;i<Nk*4;i++)
+	{
+
+		printf("%02x ",out[i]);
+	}
+	printf("\n\n");
+
+
+
+
+
+	FILE *f = fopen("ubackup.txt", "w+");
+    if (f == NULL)
+    {
+    printf("Error opening file!\n");
+    exit(1);
+    }
+    for(i=0;i<Nk*4;i++)
+	{
+		fprintf(f,"%02x ",out[i]);
+	}
+   printf("File created : ubackup.txt");
+   fclose(f);
+   }*/
+
